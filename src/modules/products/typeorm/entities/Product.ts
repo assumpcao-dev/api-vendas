@@ -1,5 +1,10 @@
 import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
 
+
+/**
+ * Entity its a reference of the table products
+ * Class Product contain the types and values of table.
+ */
 @Entity('products')
 class Product {
 
