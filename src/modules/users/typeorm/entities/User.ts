@@ -1,6 +1,10 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-
+/**
+ * Entity Users
+ * Referenced a table users in migration Users.
+ * Specified the types and values of columns on table Users.
+ */
 @Entity('users')
 export default class User {
 

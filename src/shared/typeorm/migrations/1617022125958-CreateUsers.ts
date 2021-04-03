@@ -1,5 +1,9 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
-
+/**
+ * Migration CreateUsers
+ * Method to create Table Users.
+ * #Columns: id, name, email, password, avatar, created_at, updated_at
+ */
 export class CreateUsers1616979572568 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {

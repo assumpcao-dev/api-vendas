@@ -1,5 +1,9 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
-
+/**
+ * Migration Products
+ * Method Up, Create a table named products.
+ * #Columns: id, name, price, quantity, created_at, updated_at
+ */
 export class CreateProducts1616860320557 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {

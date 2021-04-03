@@ -7,6 +7,10 @@ interface IRequest {
   email: string
 }
 
+/**
+ * class SendForgotPasswordEmailService
+ * method execute() search for userbyEmail
+ */
 export default class SendForgotPasswordEmailService {
   public async execute({ email }: IRequest): Promise<void> {
     const usersRepository = getCustomRepository(UsersRepository)

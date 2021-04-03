@@ -1,6 +1,9 @@
 import { Column, CreateDateColumn, Entity, Generated, PrimaryGeneratedColumn } from "typeorm";
 
-
+/**
+ * Entity UserToken
+ * Specified a table in migration UserToken the types and values.
+ */
 @Entity('user_tokens')
 export default class UserToken {
 

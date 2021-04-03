@@ -12,6 +12,12 @@ interface IRequest {
   avatarFileName: string
 
 }
+/**
+ * Clas UpdatedUserAvatarService
+ * method execute() findById a user and insert a avatar png
+ * if a png file already exists. then overwrite the file,
+ * save it into the DB and then save in DB.
+ */
 export default class UpdateUserAvatarService {
   public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
 

@@ -5,6 +5,11 @@ import { celebrate, Joi, Segments } from 'celebrate'
 const sessionRouter = Router()
 const sessionsController = new SessionsController()
 
+/**
+ * Route Session
+ * Type POST
+ * Validate the values: name, pasword
+ */
 sessionRouter.post(
   '/',
   celebrate({

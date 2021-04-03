@@ -11,8 +11,16 @@ const usersController = new UsersController()
 const usersAvatarController = new UsersAvatarController()
 const upload = multer(uploadConfig)
 
+/**
+ * Route Users
+ * Type GET
+ */
 usersRouter.get('/', isAuthenticated, usersController.index)
-
+/**
+ * Route Users
+ * Type POST
+ * Validate the values: name, email, password.
+ */
 usersRouter.post('/', celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
@@ -21,6 +29,11 @@ usersRouter.post('/', celebrate({
   }
 }), usersController.create)
 
+/**
+ * Route Update Avatar
+ * Type PATCH
+ * Only authorize update for authenticated users
+ */
 usersRouter.patch(
   '/avatar',
   isAuthenticated,

@@ -1,5 +1,14 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
+/**
+ * Migration UserToken
+ * #Method UP. Create a table named user_tokens
+ * #Columns: id, token, user_id, created_at, updated_at
+ * #ForeignKeys TokenUser
+ * ReferencedTable: User
+ * ReferencedColumnsName: id
+ * ColumnNames: user_id
+ */
 export class CreateUserTokens1617141402089 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {

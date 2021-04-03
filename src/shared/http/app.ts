@@ -20,6 +20,9 @@ app.use(routes)
 
 app.use(errors())
 
+/**
+ * Middleware AppError that return a json response to user.
+ */
 app.use((error: Error, request: Request, response:Response, next: NextFunction) => {
   if(error instanceof AppError) {
     return response.status(error.statusCode).json({
@@ -33,4 +36,7 @@ app.use((error: Error, request: Request, response:Response, next: NextFunction) 
     message: 'Internal server error'
   })
 })
+/**
+ * Listen that returns a message on what port the server is running.
+ */
 app.listen(port, () => console.log('Running on Port: ' + port));

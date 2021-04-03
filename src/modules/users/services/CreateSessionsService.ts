@@ -7,6 +7,11 @@ import authConfig from '@config/auth'
 import User from "../typeorm/entities/User";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 
+/**
+ * Class CreateSessionsService its create a session to allow only authenticated
+ *  users view content.
+ * #method execute() validate if userExists, validate password is the same in hashedDB.
+ */
 interface IRequest {
   email: string
   password: string
