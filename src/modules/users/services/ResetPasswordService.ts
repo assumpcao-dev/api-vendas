@@ -14,7 +14,7 @@ interface IRequest {
  *
  */
 export default class ResetPasswordService {
-  public async execute({ token, password}: IRequest): Promise<void> {
+  public async execute({ token, password }: IRequest): Promise<void> {
     const usersRepository = getCustomRepository(UsersRepository)
     const userTokensRepository = getCustomRepository(UserTokensRepository)
 
