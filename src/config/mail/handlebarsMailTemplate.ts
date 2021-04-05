@@ -1,4 +1,5 @@
 import handlebars from 'handlebars'
+import fs from 'fs'
 
 
 interface ITemplateVariables {
@@ -7,13 +8,16 @@ interface ITemplateVariables {
 }
 
 interface IParserMailTemplate {
-  template: string
+  file: string
   variables: ITemplateVariables
 }
 
 export default class handlebarsMailTemplate {
-  public async parser({ template, variables}: IParserMailTemplate): Promise<string> {
-    const parseTemplate = handlebars.compile(template)
+  public async parser({ file, variables}: IParserMailTemplate): Promise<string> {
+    const templateFileContent = await fs.promises.readFile(file, {
+      encoding: 'utf-8'
+    })
+    const parseTemplate = handlebars.compile(templateFileContent)
 
     return parseTemplate(variables)
 
