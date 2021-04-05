@@ -21,6 +21,7 @@ interface isSendMail {
   subject: string
   templateData: IParserMailTemplate
 }
+
 export default class EtherealMail {
   static async sendMail( { to, from, subject, templateData}: isSendMail): Promise<void> {
     const account = await nodemailer.createTestAccount()
