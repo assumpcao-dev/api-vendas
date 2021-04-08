@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "dev": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/app.ts",
+    "start": "tsnd -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/http/app.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "typeorm": "tsnd ./node_modules/typeorm/cli.js"

@@ -9,7 +9,8 @@ import uploadConfig from '@config/uploads'
 
 import '@shared/typeorm'
 
-const port = 3333
+const PORT = 3333
+const HOST = "0.0.0.0"
 const app = express()
 
 app.use(cors())
@@ -39,4 +40,4 @@ app.use((error: Error, request: Request, response:Response, next: NextFunction) 
 /**
  * Listen that returns a message on what port the server is running.
  */
-app.listen(port, () => console.log('Running on Port: ' + port));
+app.listen(PORT, HOST, () => console.log('Running on Port: ' + PORT));
