@@ -2,8 +2,8 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 
 
 
-@Entity('Customers')
-export default class Customers {
+@Entity('Customer')
+export default class Customer {
 
   @PrimaryGeneratedColumn('uuid')
   id: string;
