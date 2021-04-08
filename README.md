@@ -1,5 +1,10 @@
 ## API Restful com Node.js, Express, Typescript, TypeORM, Postgres, Redis, Docker, ...
 
+## Gostaria de informar que a idéia original desse App vem do Curso Udemy
+Estou realizando algumas customizações e aplicando idéias de DevOps.
+
+Caso queira a cópia original do repo segue o link: https://github.com/aluiziodeveloper/api-vendas.git
+
 Seja muito bem-vindo ao curso projeto prático de desenvolvimento de API Restful com Node.js, Express, Typescript, TypeORM, Postgres, Redis, Docker, ...
 
 Ao longo dessa jornada construiremos uma aplicação backend para gestão de vendas com funcionalidades para criação de cadastro de produtos, cadastro de clientes, pedidos de compras e uma completa gestão de usuários da aplicação, com autenticação via Token JWT, recuperação de senha por email, atualização de perfil, atualização de avatar, e muito mais.
