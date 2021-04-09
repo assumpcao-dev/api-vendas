@@ -49,7 +49,7 @@ export default class CustomersController {
 
     const deleteCustomer = new DeleteCustomerService()
 
-    await deleteCustomer.delete({ id })
+    await deleteCustomer.execute({ id })
 
     return response.json([])
   }

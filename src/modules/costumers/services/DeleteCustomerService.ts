@@ -9,7 +9,7 @@ interface IRequest {
 }
 
 export default class DeleteCustomerService {
-  public async delete({ id}: IRequest): Promise<void> {
+  public async execute({ id }: IRequest): Promise<void> {
 
     const customerRepository = getCustomRepository(CustomerRepository)
 
@@ -18,7 +18,7 @@ export default class DeleteCustomerService {
     if(!customer) {
       throw new AppError('Customer not found..')
     }
-    await customerRepository.delete(customer)
+    await customerRepository.remove(customer)
   }
 
 }
