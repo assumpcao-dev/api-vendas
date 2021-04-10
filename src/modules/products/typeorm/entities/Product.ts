@@ -1,5 +1,10 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm'
-
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 /**
  * Entity its a reference of the table products
@@ -7,7 +12,6 @@ import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColu
  */
 @Entity('products')
 class Product {
-
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -27,4 +31,4 @@ class Product {
   updated_at: Date;
 }
 
-export default Product
+export default Product;

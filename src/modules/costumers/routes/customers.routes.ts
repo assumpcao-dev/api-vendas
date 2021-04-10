@@ -1,23 +1,24 @@
-import { Router } from 'express'
-import { celebrate, Joi, Segments } from 'celebrate'
-import CustomersController from '../controller/CustomersController'
-import isAuthenticated from '@shared/http/middlewares/isAuthenticated'
+import { Router } from 'express';
+import { celebrate, Joi, Segments } from 'celebrate';
+import CustomersController from '../controller/CustomersController';
+import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
 
+export const customerRouter = Router();
+const customerController = new CustomersController();
 
-export const customerRouter = Router()
-const customerController = new CustomersController()
+customerRouter.use(isAuthenticated);
 
-customerRouter.use(isAuthenticated)
-
-customerRouter.get('/', customerController.index)
+customerRouter.get('/', customerController.index);
 
 customerRouter.get(
   '/:id',
   celebrate({
     [Segments.PARAMS]: {
-      id: Joi.string().uuid().required()
-    }
-  }),customerController.show)
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  customerController.show,
+);
 
 customerRouter.post(
   '/',
@@ -25,24 +26,30 @@ customerRouter.post(
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
-
-    }
-  }),customerController.create)
+    },
+  }),
+  customerController.create,
+);
 
 customerRouter.put(
   '/:id',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      email: Joi.string().email().required()
-    }
-  }), customerController.update)
+      email: Joi.string().email().required(),
+    },
+  }),
+  customerController.update,
+);
 
 customerRouter.delete(
-  '/:id', celebrate({
+  '/:id',
+  celebrate({
     [Segments.PARAMS]: {
-      id: Joi.string().uuid().required()
-    }
-  }),customerController.delete)
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  customerController.delete,
+);
 
 // export default customerRouter

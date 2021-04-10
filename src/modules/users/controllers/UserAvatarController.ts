@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
-import UpdateUserAvatarService from "../services/UpdateUserAvatarService";
-
+import { Request, Response } from 'express';
+import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 
 /**
  * class UserAvatarController
@@ -9,13 +8,13 @@ import UpdateUserAvatarService from "../services/UpdateUserAvatarService";
  */
 export default class UserAvatarController {
   public async update(request: Request, response: Response): Promise<Response> {
-    const updateAvatar = new UpdateUserAvatarService()
+    const updateAvatar = new UpdateUserAvatarService();
     //
-    const user  = updateAvatar.execute({
+    const user = updateAvatar.execute({
       user_id: request.user.id,
-      avatarFileName: request.file.filename
-    })
+      avatarFileName: request.file.filename,
+    });
 
-    return response.json(user)
+    return response.json(user);
   }
 }

@@ -1,56 +1,54 @@
-import { Request, Response } from "express";
-import CreateCustomerService from "../services/CreateCustomerService";
-import DeleteCustomerService from "../services/DeleteCustomerService";
-import ListCustomerService from "../services/ListCustomerService";
-import ShowCostumerService from "../services/ShowCustomerService";
-import UpdateCustomerService from "../services/UpdateCustomerService";
-
+import { Request, Response } from 'express';
+import CreateCustomerService from '../services/CreateCustomerService';
+import DeleteCustomerService from '../services/DeleteCustomerService';
+import ListCustomerService from '../services/ListCustomerService';
+import ShowCostumerService from '../services/ShowCustomerService';
+import UpdateCustomerService from '../services/UpdateCustomerService';
 
 export default class CustomersController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const listCustomers = new ListCustomerService()
+    const listCustomers = new ListCustomerService();
 
-    const customers = await listCustomers.execute()
+    const customers = await listCustomers.execute();
 
-    return response.json(customers)
-
+    return response.json(customers);
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params
-    const showCustomer = new ShowCostumerService()
-    const customer = await showCustomer.execute({id})
+    const { id } = request.params;
+    const showCustomer = new ShowCostumerService();
+    const customer = await showCustomer.execute({ id });
 
-    return response.json(customer)
+    return response.json(customer);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, email } = request.body
+    const { name, email } = request.body;
 
-    const createCustomer = new CreateCustomerService()
-    const customer = await createCustomer.execute({ name, email })
+    const createCustomer = new CreateCustomerService();
+    const customer = await createCustomer.execute({ name, email });
 
-    return response.json(customer)
+    return response.json(customer);
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { name, email } = request.body
-    const { id } = request.params
+    const { name, email } = request.body;
+    const { id } = request.params;
 
-    const updateCustomer = new UpdateCustomerService()
+    const updateCustomer = new UpdateCustomerService();
 
-    const customer = await updateCustomer.execute({ id, name, email })
+    const customer = await updateCustomer.execute({ id, name, email });
 
-    return response.json(customer)
+    return response.json(customer);
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params
+    const { id } = request.params;
 
-    const deleteCustomer = new DeleteCustomerService()
+    const deleteCustomer = new DeleteCustomerService();
 
-    await deleteCustomer.execute({ id })
+    await deleteCustomer.execute({ id });
 
-    return response.json([])
+    return response.json([]);
   }
 }
