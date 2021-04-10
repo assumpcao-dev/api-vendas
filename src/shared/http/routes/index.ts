@@ -4,7 +4,7 @@ import usersRouter from '@modules/users/routes/users.routes';
 import sessionsRouter from '@modules/users/routes/session.routes';
 import passwordRouter from '@modules/users/routes/password.routes';
 import profileRouter from '@modules/users/routes/profile.routes';
-import { customerRouter } from '@modules/costumers/routes/customers.routes';
+import { customerRouter } from '@modules/customers/routes/customers.routes';
 
 const routes = Router();
 
