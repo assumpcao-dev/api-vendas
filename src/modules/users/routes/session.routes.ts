@@ -1,9 +1,9 @@
-import { Router } from 'express'
-import SessionsController from '../controllers/SessionsController'
-import { celebrate, Joi, Segments } from 'celebrate'
+import { Router } from 'express';
+import SessionsController from '../controllers/SessionsController';
+import { celebrate, Joi, Segments } from 'celebrate';
 
-const sessionRouter = Router()
-const sessionsController = new SessionsController()
+const sessionRouter = Router();
+const sessionsController = new SessionsController();
 
 /**
  * Route Session
@@ -13,9 +13,12 @@ const sessionsController = new SessionsController()
 sessionRouter.post(
   '/',
   celebrate({
-    [Segments.BODY]:{
-    email: Joi.string().email().required(),
-    password: Joi.string().required()
-  }}),sessionsController.create)
+    [Segments.BODY]: {
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    },
+  }),
+  sessionsController.create,
+);
 
-  export default sessionRouter
+export default sessionRouter;
