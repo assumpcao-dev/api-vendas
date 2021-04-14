@@ -9,9 +9,9 @@ import uploadConfig from '@config/uploads';
 
 import '@shared/typeorm';
 
+const app = express();
 const PORT = 3333;
 const HOST = '0.0.0.0';
-const app = express();
 
 app.use(cors());
 app.use(express.json());
