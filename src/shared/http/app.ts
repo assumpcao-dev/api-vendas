@@ -1,7 +1,9 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
+
 import { errors } from 'celebrate';
 import routes from './routes/index';
 import AppError from '@shared/errors/AppError';
@@ -10,6 +12,7 @@ import uploadConfig from '@config/uploads';
 import '@shared/typeorm';
 
 const app = express();
+
 const PORT = 3333;
 const HOST = '0.0.0.0';
 
@@ -42,4 +45,6 @@ app.use(
 /**
  * Listen that returns a message on what port the server is running.
  */
-app.listen(PORT, HOST, () => console.log('Running on Port: ' + PORT));
+app.listen(PORT, HOST, () =>
+  console.log('Lets code, we can do it.🏆  ', `${process.env.APP_API_URL} 🚀`),
+);

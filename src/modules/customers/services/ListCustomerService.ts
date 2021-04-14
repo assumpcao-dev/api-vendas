@@ -12,6 +12,7 @@ export default class ListCustomerService {
     const customerRepository = getCustomRepository(CustomerRepository);
 
     const customer = customerRepository.find();
+
     return customer;
   }
 }
