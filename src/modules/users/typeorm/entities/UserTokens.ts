@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -11,9 +11,10 @@ import {
  * Entity UserToken
  * Specified a table in migration UserToken the types and values.
  */
+import { v4 as uuid } from 'uuid';
 @Entity('user_tokens')
 export default class UserToken {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
@@ -28,4 +29,10 @@ export default class UserToken {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }

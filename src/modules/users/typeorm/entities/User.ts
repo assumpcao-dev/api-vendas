@@ -2,7 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
@@ -12,9 +12,10 @@ import { Exclude, Expose } from 'class-transformer';
  * Referenced a table users in migration Users.
  * Specified the types and values of columns on table Users.
  */
+import { v4 as uuid } from 'uuid';
 @Entity('users')
 export default class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
@@ -36,6 +37,11 @@ export default class User {
   @UpdateDateColumn()
   updated_at: Date;
 
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
     if (!this.avatar) {

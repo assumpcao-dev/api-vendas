@@ -1,6 +1,6 @@
 import { getCustomRepository } from 'typeorm';
-import Customer from '../typeorm/entities/Customers';
-import CustomerRepository from '../typeorm/repositories/CustomerRepository';
+import Customer from '../typeorm/entities/Customer';
+import CustomersRepository from '../typeorm/repositories/CustomerRepository';
 
 /**
  * class ListUserService
@@ -8,10 +8,13 @@ import CustomerRepository from '../typeorm/repositories/CustomerRepository';
  * return all Users inside of DB.
  */
 export default class ListCustomerService {
-  public async execute(): Promise<Customer[]> {
-    const customerRepository = getCustomRepository(CustomerRepository);
+  private customersRepository: CustomersRepository;
 
-    const customer = customerRepository.find();
+  constructor() {
+    this.customersRepository = getCustomRepository(CustomersRepository);
+  }
+  public async execute(): Promise<Customer[]> {
+    const customer = this.customersRepository.find();
 
     return customer;
   }

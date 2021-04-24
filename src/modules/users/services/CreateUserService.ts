@@ -16,20 +16,24 @@ interface IRequest {
 }
 
 export default class CreateUserService {
-  public async execute({ name, email, password }: IRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
-    const emailsExists = await usersRepository.findByEmail(email);
+  private usersRepository: UsersRepository;
+  constructor() {
+    this.usersRepository = getCustomRepository(UsersRepository);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public async execute({ name, email, password }: IRequest) {
+    const emailsExists = await this.usersRepository.findByEmail(email);
     if (emailsExists) {
       throw new AppError('The email is already in use.');
     }
     const hashedPassword = await hash(password, 8);
 
-    const user = usersRepository.create({
+    const user = this.usersRepository.create({
       name,
       email,
       password: hashedPassword,
     });
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }

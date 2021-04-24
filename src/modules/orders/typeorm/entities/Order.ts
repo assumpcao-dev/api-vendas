@@ -1,18 +1,20 @@
-import Customer from '@modules/customers/typeorm/entities/Customers';
+import Customer from '../../../customers/typeorm/entities/Customer';
 import {
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { v4 as uuid } from 'uuid';
+
 import OdersProducts from './OrderProducts';
 
 @Entity('orders')
 export default class Order {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @ManyToOne(() => Customer)
@@ -29,4 +31,10 @@ export default class Order {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }

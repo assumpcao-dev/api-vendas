@@ -1,20 +1,20 @@
-import OrdersProducts from '@modules/orders/typeorm/entities/OrderProducts';
+import OrdersProducts from '../../../orders/typeorm/entities/OrderProducts';
 import {
   Column,
   CreateDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-
+import { v4 as uuid } from 'uuid';
 /**
  * Entity its a reference of the table products
  * Class Product contain the types and values of table.
  */
 @Entity('products')
 class Product {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @OneToMany(() => OrdersProducts, order_products => order_products.product)
@@ -34,6 +34,12 @@ class Product {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }
 
 export default Product;

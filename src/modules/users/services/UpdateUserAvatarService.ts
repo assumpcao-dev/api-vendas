@@ -4,7 +4,6 @@ import fs from 'fs';
 
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
 
 interface IRequest {
@@ -18,10 +17,14 @@ interface IRequest {
  * save it into the DB and then save in DB.
  */
 export default class UpdateUserAvatarService {
-  public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
+  private usersRepository: UsersRepository;
 
-    const user = await usersRepository.findById(user_id);
+  constructor() {
+    this.usersRepository = getCustomRepository(UsersRepository);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public async execute({ user_id, avatarFileName }: IRequest) {
+    const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError('User not found.');
@@ -35,7 +38,7 @@ export default class UpdateUserAvatarService {
     }
     user.avatar = avatarFileName;
 
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }

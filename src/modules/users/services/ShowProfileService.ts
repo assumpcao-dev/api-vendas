@@ -1,6 +1,5 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
 
 interface IRequest {
@@ -8,10 +7,14 @@ interface IRequest {
 }
 
 export default class ShowProductService {
-  public async execute({ user_id }: IRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
+  private usersRepository: UsersRepository;
 
-    const user = await usersRepository.findById(user_id);
+  constructor() {
+    this.usersRepository = getCustomRepository(UsersRepository);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public async execute({ user_id }: IRequest) {
+    const user = await this.usersRepository.findById(user_id);
     if (!user) {
       throw new AppError('User not found..');
     }

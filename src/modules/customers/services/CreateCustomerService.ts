@@ -1,8 +1,6 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-
-import Customer from '../typeorm/entities/Customers';
-import CustomerRepository from '../typeorm/repositories/CustomerRepository';
+import CustomersRepository from '../typeorm/repositories/CustomerRepository';
 
 /**
  * Class CreateSessionsService its create a session to allow only authenticated
@@ -15,17 +13,21 @@ interface IRequest {
 }
 
 export default class CreateCustomerService {
-  public async execute({ name, email }: IRequest): Promise<Customer> {
-    const customersRepository = getCustomRepository(CustomerRepository);
-    const emailExists = await customersRepository.findByEmail(email);
+  private customersRepository: CustomersRepository;
+  constructor() {
+    this.customersRepository = getCustomRepository(CustomersRepository);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public async execute({ name, email }: IRequest) {
+    const emailExists = await this.customersRepository.findByEmail(email);
     if (emailExists) {
       throw new AppError('Email Address already used.', 401);
     }
-    const customer = customersRepository.create({
+    const customer = this.customersRepository.create({
       name,
       email,
     });
-    await customersRepository.save(customer);
+    await this.customersRepository.save(customer);
 
     return customer;
   }

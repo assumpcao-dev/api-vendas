@@ -1,17 +1,20 @@
 import RedisCache from '@shared/cache/RedisCache';
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Product from '../typeorm/entities/Product';
-import { ProductRepository } from '../typeorm/repositories/ProductsRepository';
+import { ProductsRepository } from '../typeorm/repositories/ProductsRepository';
 
 interface IRequest {
   id: string;
 }
 export default class ShowProductService {
-  public async execute({ id }: IRequest): Promise<Product | undefined> {
-    const productsRepository = getCustomRepository(ProductRepository);
+  private productsRepository: ProductsRepository;
+  constructor() {
+    this.productsRepository = getCustomRepository(ProductsRepository);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  public async execute({ id }: IRequest) {
     const redisCache = new RedisCache();
-    const product = await productsRepository.findOne(id);
+    const product = await this.productsRepository.findOne(id);
 
     if (!product) {
       throw new AppError('Product not found..');

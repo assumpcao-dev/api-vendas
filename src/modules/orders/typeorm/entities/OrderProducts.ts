@@ -4,17 +4,18 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 import Order from './Order';
-import Customer from '@modules/customers/typeorm/entities/Customers';
-import Product from '@modules/products/typeorm/entities/Product';
+import Customer from '../../../customers/typeorm/entities/Customer';
+import Product from '../../../products/typeorm/entities/Product';
 
 @Entity('orders_products')
 export default class OrdersProducts {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @ManyToOne(() => Order, order => order.order_products)
@@ -42,4 +43,10 @@ export default class OrdersProducts {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }

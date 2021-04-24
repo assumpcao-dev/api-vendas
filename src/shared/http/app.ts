@@ -14,7 +14,7 @@ import '@shared/typeorm';
 
 const app = express();
 
-const PORT = 3333;
+const PORT = 5000;
 const HOST = '0.0.0.0';
 
 app.use(cors());
@@ -49,5 +49,5 @@ app.use(
  * Listen that returns a message on what port the server is running.
  */
 app.listen(PORT, HOST, () =>
-  console.log('Lets code, we can do it.🏆  ', `${process.env.APP_API_URL} 🚀`),
+  console.log('Lets code, we can do it.🏆  🚀' + PORT),
 );

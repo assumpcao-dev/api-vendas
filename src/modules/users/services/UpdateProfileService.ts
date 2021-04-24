@@ -1,6 +1,5 @@
 import AppError from '@shared/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import User from '../typeorm/entities/User';
 import UsersRepository from '../typeorm/repositories/UsersRepository';
 import { compare, hash } from 'bcryptjs';
 
@@ -13,21 +12,24 @@ interface IRequest {
 }
 
 export default class UpdateProfileService {
+  private usersRepository: UsersRepository;
+  constructor() {
+    this.usersRepository = getCustomRepository(UsersRepository);
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public async execute({
     user_id,
     name,
     email,
     password,
     old_password,
-  }: IRequest): Promise<User> {
-    const usersRepository = getCustomRepository(UsersRepository);
-
-    const user = await usersRepository.findById(user_id);
+  }: IRequest) {
+    const user = await this.usersRepository.findById(user_id);
     if (!user) {
       throw new AppError('User not found..');
     }
 
-    const userUpdateEmail = await usersRepository.findByEmail(email);
+    const userUpdateEmail = await this.usersRepository.findByEmail(email);
 
     if (userUpdateEmail && userUpdateEmail.id !== user.id) {
       throw new AppError('There is already one user with this email.');
@@ -48,7 +50,7 @@ export default class UpdateProfileService {
     user.name = name;
     user.email = email;
 
-    await usersRepository.save(user);
+    await this.usersRepository.save(user);
 
     return user;
   }
