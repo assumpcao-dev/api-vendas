@@ -14,7 +14,7 @@ import '@shared/typeorm';
 
 const app = express();
 
-const PORT = 5000;
+const PORT = 50000;
 const HOST = '0.0.0.0';
 
 app.use(cors());
